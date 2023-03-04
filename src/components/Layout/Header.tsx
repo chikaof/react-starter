@@ -1,8 +1,6 @@
 import Link from "next/link";
 import IconButton from "@/components/ui/IconButton";
 import { BsGithub } from "react-icons/bs";
-import { Dropdown, DropdownItem } from "../ui/Dropdown";
-import { BiArchive } from "react-icons/bi";
 
 export interface HeaderProps {}
 
