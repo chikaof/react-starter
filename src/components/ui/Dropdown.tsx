@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { BiLinkExternal } from "react-icons/bi";
 import Button, { type ButtonProps } from "./Button";
+import { BsChevronBarDown, BsChevronDown } from "react-icons/bs";
 
 interface DropdownProps extends ButtonProps {
   title?: string | undefined;
@@ -12,8 +13,8 @@ interface DropdownProps extends ButtonProps {
 export const Dropdown = (props: DropdownProps) => {
   return (
     <Menu as="div" className="relative inline-block text-left">
-      <Menu.Button as={Button} className={props.className} icon={props.icon}>
-        {props.title}
+      <Menu.Button as={Button} className={props.className}>
+        {props.title} <BsChevronDown className="ml-2" />
       </Menu.Button>
       <Transition
         as={Fragment}
@@ -24,7 +25,7 @@ export const Dropdown = (props: DropdownProps) => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute p-1 right-2 mt-2 w-56 origin-top-right divide-y z-40 divide-gray-100 rounded-md bg-midnight border border-zinc-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="absolute py-1 px-2 right-2 mt-2 w-56 origin-top-right divide-y z-40 divide-gray-100 rounded-md bg-midnight border border-zinc-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">{props.children}</div>
         </Menu.Items>
       </Transition>
@@ -41,8 +42,10 @@ export const DropdownItem = (props: DropdownProps) => {
         onClick={props.onClick}
       >
         <div className="flex items-center">
-          {props.icon && <div className="mr-3">{props.icon}</div>}
           {props.children}
+          {props.icon && !props.external && (
+            <div className="ml-auto">{props.icon}</div>
+          )}
           {props.external && (
             <div className="ml-2">
               <BiLinkExternal size={12} className="text-gray-400" />
